@@ -25,6 +25,11 @@ public class Game extends Form {
 			//invoke appropriate method in GameWorld 
 			//to manipulate and display data and game state values in game model
 		
+		/* 
+		 * how to accept single character commands via text field on form
+		 * 	is indicated in appendix - C1 Notes
+		 */
+		
 		
 	}
 	
