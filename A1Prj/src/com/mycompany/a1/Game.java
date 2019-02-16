@@ -37,10 +37,7 @@ public class Game extends Form {
 					
 				switch (sCommand.charAt(0))
 				{
-					case 'e': //if letter e is input
-						gw.eliminate(); //eliminate gameworld.
-						break;
-					
+
 					case 'a': // add a new asteroid to the world 
 						//method call to add asteroid
 						break;
@@ -85,9 +82,45 @@ public class Game extends Form {
 						break;
 					case 'k':
 						//remove asteroid killed by PS and increment player score
+						break;
+					case 'e': //if letter e is input
+						gw.eliminate(); //eliminate gameworld.
+						break;
+					
+					case 'E':
+						//remove missile and PS after a missile has struck a PS
+						break;
+					case 'c':
+						//PS crashed into asteroid, remove ship and asteroid 
+						//decrement the count of lives left
+						//game is over if no lives left
+						break;
+					case 'h':
+						//the PS has hit a NPS, remove NPS and decrement lives left
+						break;
+					case 'x':
+						//two asteroids have collided
+						//remove two asteroids from game
+						break;
+					case 'I':
+						//asteroid impacted NPS, remove both from game
+						break;
+					case 't':
+						//game clock has ticked
+						//updated game state variables
+						break;
+					case 'p':
+						//print display of current game state values
+						break;
+					case 'm':
+						//print a map showing the current world state
+						break;
+					case 'q':
+						//terminate program by using System.exit(0);
+						System.exit(0);
+						break;
 					default:
 						System.out.println("\nInput is invalid\n");
-					//enter all commands
 				} // switch (sCommand.chartAt(0))
 			} //public void actionPerformed(ActionEvent evt)
 		} //myTextField.addActionListener(new ActionListener()
