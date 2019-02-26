@@ -2,8 +2,15 @@ package com.mycompany.a1;
 
 public abstract class PlayerShip extends MoveableGameObject{
 
-	public PlayerShip() {
-		// TODO Auto-generated constructor stub
+	private int missileCount;
+	
+	public int getMissileCount()
+	{
+		
+		int retval=0;
+		
+		
+		return retval;
 	}
 
 }
