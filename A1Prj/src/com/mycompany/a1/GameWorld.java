@@ -1,13 +1,25 @@
 package com.mycompany.a1;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
+import java.util.Vector;
 
 public class GameWorld {
 
-	private ArrayList<GameObject> list;
-	GameObjIterator iterator;
+	
+	
+	private Vector<GameObject> gameObjs = new Vector<GameObject>();
+	
+	private int score;
+	private int elapsedTime;
+	private int playerLives;
+	private boolean endGame;
+	
+	
 	public void init() 
 	{
+		score = 0;
+		elapsedTime = 0;
+		playerLives = 3;
+		endGame = false;
 		//code here to create the initial game objects/setup
 	}
 	
@@ -15,7 +27,8 @@ public class GameWorld {
 	 * additional methods here to manipulate world objects and related game state data
 	 */
 	public GameWorld() {
-		// TODO Auto-generated constructor stub
+		init();
+	
 	}
 
 	public void eliminate() {
@@ -23,57 +36,134 @@ public class GameWorld {
 		
 	}
 
-	public class GameObjIterator implements Iterator<Object>
-	{
-		private int index;
-		
-		public GameObjIterator()
+	
+	
+	public void addObj(char c) {
+		// TODO Auto-generated method stub
+		switch(c)
 		{
-			index = -1;
+		case 'a': 
+			Asteroid  a = new Asteroid();
+			gameObjs.add(a);
+			System.out.println("An Asteroid has been created and added to game world!");
+			break;
+		case 'y':
+			EnemyShip e = new EnemyShip();
+			gameObjs.add(e);
+			System.out.println("An Enemy Ship has been created and added to game world!");
+			break;
+		case 'b':
+			//add ss
+		case 's':
+			//add ps
+			
+			
+			
+			 
 		}
 		
-		@Override
-		public boolean hasNext()
-		{
-			if(list.size() <= 0)
-				return false;
-			if(index == list.size() -1)
-			{
-				index = -1;
-				return false;
-			}
-			return true;
-		
-		}
-		
-		@Override
-		public Object next()
-		{
-			index++;
-			return list.get(index);
-		}
-		
-		@Override
-		public void remove()
-		{
-			list.remove(index);
-			index--;
-		}
-		
-		public void ResetIndex()
-		{
-			index = -1;
-		}
-		
-		public Object current()
-		{
-			if(index >= 0)
-			{
-				if(index >= 0)
-					return list.get(index);
-			}
-			return null;
-		}
 	}
+	
+	public void addNewAsteroid() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addNPS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addPS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void changeSpeed(char c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void turnPS(char c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void turnML() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void firePMissile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void fireEMissile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void resetPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void loadPMissile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void removeObj(char c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void missileStrikePS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void asteroidStrikePS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void NPSStrikePS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void asteroidCollision() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void asteroidStrikeNPS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void clkTick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void printGameState() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void printGameMap() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addSS() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
 
