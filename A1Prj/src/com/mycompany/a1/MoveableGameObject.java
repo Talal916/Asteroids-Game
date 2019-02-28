@@ -60,7 +60,7 @@ public abstract class MoveableGameObject extends GameObject {
 	
 	public void setSpeed(int x)
 	{
-		objSpeed = x;
+		objSpeed = objSpeed + x;
 	}
 	
 	public int getSpeed()

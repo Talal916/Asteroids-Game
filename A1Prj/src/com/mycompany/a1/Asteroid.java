@@ -6,7 +6,7 @@ public class Asteroid extends MoveableGameObject {
 	
 	public Asteroid()
 	{
-		setColor(0,0,255);
+		setColor(0,0,255); //asteroids are blue
 		this.size = rand.nextInt(25)+6;
 	}
 	public int getSize()

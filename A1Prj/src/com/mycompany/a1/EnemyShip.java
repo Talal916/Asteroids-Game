@@ -5,20 +5,19 @@ public class EnemyShip extends MoveableGameObject {
 	private int size;
 	private int missileCount;
 
-
 	public EnemyShip()
 	{
 		size = (rand.nextInt(2)+1)*10;
 		missileCount  = 2;
-		setColor(0,255,0);
-		
+		setColor(255,255,0); //enemy ships are yellow
 	}
+	
 	public int getSize()
 	{
-		
 		return size;
 		
 	}
+	
 	public int getMissileCount()
 	{
 		return missileCount;
@@ -28,7 +27,6 @@ public class EnemyShip extends MoveableGameObject {
 	{
 		missileCount--;
 	}
-	
 	
 	public String toString()
 	{

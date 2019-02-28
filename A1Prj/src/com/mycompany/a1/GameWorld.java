@@ -48,12 +48,15 @@ public class GameWorld {
 			System.out.println("An Asteroid has been created and added to game world!");
 			break;
 		case 'y':
-			EnemyShip e = new EnemyShip();
-			gameObjs.add(e);
+			EnemyShip y = new EnemyShip();
+			gameObjs.add(y);
 			System.out.println("An Enemy Ship has been created and added to game world!");
 			break;
 		case 'b':
-			//add ss
+			SpaceStation b = new SpaceStation();
+			gameObjs.add(b);
+			System.out.println("A SpaceShip has been created and added to game world!");
+			break;
 		case 's':
 			//add ps
 			

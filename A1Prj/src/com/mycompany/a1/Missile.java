@@ -4,6 +4,11 @@ public class Missile extends MoveableGameObject{
 
 	private int fuelLevel;
 	
+	public Missile(int missileDirection, Point2D shotLocation, boolean friendly)
+	{
+		fuelLevel =
+	}
+	
 	public int getFuel()
 	{
 		
