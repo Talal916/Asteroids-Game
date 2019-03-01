@@ -1,6 +1,6 @@
 package com.mycompany.a1;
 
-public abstract class PlayerShip extends MoveableGameObject{
+public class PlayerShip extends MoveableGameObject implements ISteerable{
 
 	private int missileCount;
 	private MissileLauncher launcher;
@@ -87,6 +87,8 @@ public abstract class PlayerShip extends MoveableGameObject{
 		}
 	}
 	
+	
+
 	public String toString()
 	{
 		String parentDesc = super.toString();
@@ -94,5 +96,11 @@ public abstract class PlayerShip extends MoveableGameObject{
 		String retval = "Player Ship: "+parentDesc+myDesc+launcher.toString();
 		
 		return retval;
+	}
+
+	@Override
+	public void turn() {
+		// TODO Auto-generated method stub
+		
 	}
 }

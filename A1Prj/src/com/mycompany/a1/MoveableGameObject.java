@@ -82,7 +82,7 @@ public abstract class MoveableGameObject extends GameObject {
 	public String toString()
 	{
 		String parentString = super.toString();
-		String str = "Speed = " + objSpeed + "Dir = " + objDirection;
+		String str = "Speed = " + objSpeed + " Direction = " + objDirection;
 		
 		
 		String retval = parentString + str;

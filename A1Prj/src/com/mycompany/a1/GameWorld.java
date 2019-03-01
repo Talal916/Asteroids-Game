@@ -1,5 +1,5 @@
 package com.mycompany.a1;
-import java.util.Random;
+import java.util.Random; 
 import java.util.Vector;
 
 public class GameWorld {
@@ -12,6 +12,74 @@ public class GameWorld {
 	private int elapsedTime;
 	private int playerLives;
 	private boolean endGame;
+	
+	
+	
+	public PlayerShip findPS()
+	{
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof PlayerShip)
+			{
+				return (PlayerShip) gameObjs.get(i);
+			}
+		}
+		System.out.println("No Player Ship found!");
+		return null;
+	}
+	
+	
+	public MissileLauncher findML()
+	{
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof MissileLauncher)
+			{
+				return (MissileLauncher) gameObjs.get(i);
+			}
+		}
+		System.out.println("No Missile Launcher found!");
+		return null;
+	}
+	
+	public EnemyShip findES()
+	{
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof EnemyShip)
+			{
+				return (EnemyShip) gameObjs.get(i);
+			}
+		}
+		System.out.println("No Enemy Ship found!");
+		return null;
+	}
+	
+	public Asteroid findAst() //finds Asteroid and returns index of Asteroid
+	{
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof Asteroid)
+			{
+				return (Asteroid) gameObjs.get(i);
+			}
+		}
+		System.out.println("No Asteroid found!");
+		return null;
+	}
+	
+	public Missile findMissile() //finds Asteroid and returns index of Asteroid
+	{
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof Missile)
+			{
+				return (Missile) gameObjs.get(i);
+			}
+		}
+		System.out.println("No Missile found!");
+		return null;
+	}
 	
 	
 	public void init() 
@@ -58,8 +126,10 @@ public class GameWorld {
 			System.out.println("A SpaceShip has been created and added to game world!");
 			break;
 		case 's':
-			//add ps
-			
+			PlayerShip s = new PlayerShip();
+			gameObjs.add(s);
+			System.out.println("A Player Ship has been created and added to game world!");
+			break;
 			
 			
 			 
@@ -67,105 +137,151 @@ public class GameWorld {
 		
 	}
 	
-	public void addNewAsteroid() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addNPS() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addPS() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public void changeSpeed(char c) {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null)
+		{
+			findPS().changeSpeed(c); //finds player ship, and changes speed
+		}
 	}
 
 	public void turnPS(char c) {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null)
+		{
+			findPS().turnPS(c); //finds player ship, and changes dir
+		}		
 	}
 
 	public void turnML() {
-		// TODO Auto-generated method stub
-		
+		if(findML() != null)
+		{
+			findML().turn(); //finds missile launcher, turns it
+		}			
 	}
 
 	public void firePMissile() {
-		// TODO Auto-generated method stub
-		
+		if(findML() != null)
+		{
+			findPS().fireMissile(); //finds missile launcher, fires PS missile
+		}			
 	}
 
 	public void fireEMissile() {
-		// TODO Auto-generated method stub
-		
+		if(findES() != null)
+		{
+			findES().fire();; //finds ES, fires missile
+		}			
 	}
 
 	public void resetPos() {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null)
+		{
+			findPS().resetPos(); //finds PS and resets position to center of screen		
+		}		
 	}
+		
+	
 
 	public void loadPMissile() {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null)
+		{
+			findPS().reloadMissiles(); //finds PS and reloads PS missiles
+		}		
 	}
 
-	public void removeObj(char c) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void removeAsteroid() {
+		if(findAst() != null)
+		{
+			gameObjs.remove(findAst()); //finds first asteroid and removes that asteroid
+		}		
+	}		
+	
 
 	public void missileStrikePS() {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null && findMissile() != null)
+		{
+			gameObjs.remove(findPS());
+			gameObjs.remove(findMissile());
+		}
+		System.out.println("Sorry, a missile struck your ship and destroyed it!");		
 	}
 
 	public void asteroidStrikePS() {
-		// TODO Auto-generated method stub
-		
+		if(findPS() != null && findAst() != null)
+		{
+			gameObjs.remove(findPS());
+			gameObjs.remove(findAst());
+			playerLives--;
+		}		
 	}
 
 	public void NPSStrikePS() {
-		// TODO Auto-generated method stub
-		
+		if(findES() != null && findPS() != null)
+		{
+			gameObjs.remove(findPS());
+			gameObjs.remove(findES());
+			playerLives--;
+		}				
 	}
 
 	public void asteroidCollision() {
-		// TODO Auto-generated method stub
+		if(findAst() != null)
+		{
+			gameObjs.remove(findAst());
+			gameObjs.remove(findAst());
+		}
 		
 	}
 
 	public void asteroidStrikeNPS() {
-		// TODO Auto-generated method stub
-		
+		if(findES() != null && findAst() != null)
+		{
+			gameObjs.remove(findES());
+			gameObjs.remove(findAst());
+		}				
 	}
 
 	public void clkTick() {
-		// TODO Auto-generated method stub
+     /*
+      * Things to do when clock ticks-
+      * - move objects, check fuel levels of missiles
+      * - have spaceshipp blink
+      * -tick the clock
+      */
+		elapsedTime++;
 		
+		for(int i=0; i < gameObjs.size(); i++)
+		{
+			if(gameObjs.get(i) instanceof IMoveable)
+			{
+				((IMoveable) gameObjs.get(i)).move(); //finding each moveable object and moving it
+				if(gameObjs.get(i) instanceof Missile)
+					if(((Missile)gameObjs.get(i)).getFuel() == 0)
+						gameObjs.remove(i); //if object is missile and fuel level is 0, remove it.
+			}
+			else if(gameObjs.get(i) instanceof SpaceStation)
+			{
+				((SpaceStation) gameObjs.get(i)).blinkCounter(); //increase blink counter on space ship
+			}
+		}
 	}
 
 	public void printGameState() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Score: "+ score);
+		System.out.println("Missiles Left: "+findPS().getMissileCount());
+		System.out.println("Game Time: " + elapsedTime +"\n");
 	}
 
 	public void printGameMap() {
-		// TODO Auto-generated method stub
+		for(int i=0; i <  gameObjs.size(); i++)
+		{
+			System.out.println(gameObjs.get(i));
+		}
 		
 	}
 
-	public void addSS() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 }

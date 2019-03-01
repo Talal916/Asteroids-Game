@@ -16,7 +16,6 @@ public class SpaceStation extends FixGameObject {
 		blinkRate = rand.nextInt(4)+1;
 		stationLight = true;
 		blinkTimer = 0;
-		
 	}
 	
 	public int getBlinkRate()

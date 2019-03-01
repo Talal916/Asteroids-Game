@@ -93,10 +93,10 @@ public class Game extends Form {
 							//load new supply of missiles into PS
 							break;
 						case 'k':
-							gw.removeObj('A');
+							gw.removeAsteroid();
 							//remove asteroid killed by PS and increment player score
 							break;
-						case 'e': //if letter e is input
+						case 'e': //if letter e is inputas
 							gw.eliminate(); 
 							//eliminate gameworld.
 							break;
