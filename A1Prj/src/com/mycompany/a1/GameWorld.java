@@ -250,7 +250,7 @@ public class GameWorld {
 
 	private void gameOver() {
 		System.out.println("Sorry! Your ship was destroyed! Game OVER! \nYour Stats\n--------------------------------------------\n\n");
-		printGameState();
+		endGameStats();
 		setEndGame(true);
 		
 		
@@ -269,7 +269,10 @@ public class GameWorld {
 			if(playerLives == 1)
 				gameOver();
 			else
+			{
 				playerLives--;
+				addObj('s');
+			}
 		}		
 	}
 
@@ -281,7 +284,10 @@ public class GameWorld {
 			if(playerLives == 1)
 				gameOver();
 			else
+			{
 				playerLives--;
+				addObj('s');
+			}
 		}				
 	}
 
@@ -338,9 +344,17 @@ public class GameWorld {
 
 	public void printGameState() {
 		System.out.println("Score: "+ score);
-		System.out.println("Missiles Left: "+findPS().getMissileCount());
+		if(findPS() != null)
+			System.out.println("Missiles Left: "+findPS().getMissileCount());
 		System.out.println("Game Time: " + elapsedTime +"\n");
 		System.out.println("Lives Left: "+ playerLives);
+	}
+	
+	public void endGameStats()
+	{
+		System.out.println("Score:  "+ score);
+		System.out.println("Game Time: "+elapsedTime);
+		System.out.println("Lives left: "+playerLives);
 	}
 
 	public void printGameMap() {
