@@ -33,7 +33,7 @@ public class Game extends Form {
 				String sCommand = myTextField.getText().toString();
 				myTextField.clear();
 				
-				if(!sCommand.equals(null) && sCommand.length() > 0) //&& !gameover
+				if(!sCommand.equals(null) && sCommand.length() > 0 && !gw.isEndGame()) //&& !endGame
 				{
 					switch (sCommand.charAt(0))
 					{
@@ -96,13 +96,14 @@ public class Game extends Form {
 							gw.removeAsteroid();
 							//remove asteroid killed by PS and increment player score
 							break;
-						case 'e': //if letter e is inputas
+						case 'e': //if letter e is input, eliminate NPS
 							gw.eliminate(); 
-							//eliminate gameworld.
 							break;
 						
 						case 'E':
 							gw.missileStrikePS();
+					
+							
 							//remove missile and PS after a missile has struck a PS
 							break;
 						case 'c':
@@ -143,8 +144,16 @@ public class Game extends Form {
 							break;
 						default:
 							System.out.println("\nInput is invalid\n");
+							break;
+							
+
 					} // switch (sCommand.chartAt(0))
 				} //if sCommand not null
+				if(gw.isEndGame())
+				{
+					System.out.println("Exiting Game Now!");
+					System.exit(0);
+				}
 			} //public void actionPerformed(ActionEvent evt)
 		} //myTextField.addActionListener(new ActionListener()
 		

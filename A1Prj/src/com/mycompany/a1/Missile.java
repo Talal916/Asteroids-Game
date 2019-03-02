@@ -2,7 +2,7 @@ package com.mycompany.a1;
 
 import com.codename1.ui.geom.Point2D;
 
-public class Missile extends MoveableGameObject{
+public class Missile extends MoveableGameObject {
 
 	private int fuelLevel;
 	boolean isFriendly;
@@ -51,9 +51,9 @@ public class Missile extends MoveableGameObject{
 		String myDesc = " fuel = " + fuelLevel;
 		String retval = "";
 		if(isFriendly)
-			retval = "PS Missile: " + parentDesc + myDesc;
+			retval = " PS Missile: " + parentDesc + myDesc;
 		else
-			retval = "Enemy Missile: " + parentDesc + myDesc;
+			retval = " Enemy Missile: " + parentDesc + myDesc;
 		
 		
 		return retval;

@@ -17,11 +17,7 @@ public class Asteroid extends MoveableGameObject {
 		
 	}
 	
-	@Override
-	public void Move() 
-	{
-		super.Move();
-	}
+
 	
 	public String toString()
 	{
@@ -33,5 +29,10 @@ public class Asteroid extends MoveableGameObject {
 		
 	}
 	
+	@Override
+	public void Move()
+	{
+		super.Move();
+	}
 
 }

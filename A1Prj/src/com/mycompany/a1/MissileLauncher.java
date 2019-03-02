@@ -24,7 +24,13 @@ public class MissileLauncher extends MoveableGameObject implements ISteerable
 	
 	public String toString()
 	{
-		String retval = "Missile Launcher Direction =  "+launcherDir;
+		String retval = " || Missile Launcher Direction =  "+launcherDir;
 		return retval;
+	}
+
+	@Override
+	public void Move() {
+		// TODO Auto-generated method stub
+		super.Move();
 	}
 }

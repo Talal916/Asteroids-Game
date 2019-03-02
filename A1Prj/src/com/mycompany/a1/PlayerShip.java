@@ -1,6 +1,6 @@
 package com.mycompany.a1;
 
-public class PlayerShip extends MoveableGameObject implements ISteerable{
+public class PlayerShip extends MoveableGameObject{
 
 	private int missileCount;
 	private MissileLauncher launcher;
@@ -15,6 +15,11 @@ public class PlayerShip extends MoveableGameObject implements ISteerable{
 		setColor(255,255,255); //player ship is white
 	}
 	
+	public MissileLauncher getMissileLauncher()
+	{
+		return launcher;
+	}
+	
 	public int getMissileCount()
 	{
 		
@@ -27,9 +32,15 @@ public class PlayerShip extends MoveableGameObject implements ISteerable{
 		return launcher.getDirection();
 	}
 	
-	public void fireMissile()
+	public Missile fireMissile()
 	{
+		if(missileCount == 0)
+			return null;
 		missileCount--;
+		Missile bogey = new Missile(getDirection(),getLocation(),true);
+		System.out.println("A missile has been fired from the Player Ship!");
+		
+		return bogey;
 	}
 	
 	public void reloadMissiles()
@@ -49,12 +60,12 @@ public class PlayerShip extends MoveableGameObject implements ISteerable{
 		case 'i':
 			//increase speed up to 15
 			if(getSpeed() < 15)
-				setSpeed(1+getSpeed());
+				setSpeed(1);
 			break;
 		case 'd':
 			//decrease speed down to min of 0
 			if(getSpeed() > 0)
-				setSpeed(-1+getSpeed());
+				setSpeed(-1);
 			break;
 		default:
 			break;
@@ -98,9 +109,7 @@ public class PlayerShip extends MoveableGameObject implements ISteerable{
 		return retval;
 	}
 
-	@Override
-	public void turn() {
-		// TODO Auto-generated method stub
-		
-	}
+
+
+
 }

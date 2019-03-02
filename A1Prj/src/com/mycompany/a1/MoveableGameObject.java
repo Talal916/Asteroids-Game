@@ -60,6 +60,7 @@ public abstract class MoveableGameObject extends GameObject {
 	
 	public void setSpeed(int x)
 	{
+		System.out.println("Adding objSpeed:" + objSpeed + " to x: "+ x);
 		objSpeed = objSpeed + x;
 	}
 	
@@ -82,7 +83,7 @@ public abstract class MoveableGameObject extends GameObject {
 	public String toString()
 	{
 		String parentString = super.toString();
-		String str = "Speed = " + objSpeed + " Direction = " + objDirection;
+		String str = " || Speed = " + objSpeed + " || Direction = " + objDirection;
 		
 		
 		String retval = parentString + str;

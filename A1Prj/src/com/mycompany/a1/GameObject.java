@@ -71,8 +71,8 @@ public class GameObject {
 	public String toString()
 	{
 		String retval = 
-				"Location = " + location.getX() + "," + location.getY() 
-				+ "Color = [" + ColorUtil.red(rgb) + "," +
+				" Location = " + location.getX() + "," + location.getY() 
+				+ " Color = [" + ColorUtil.red(rgb) + "," +
 				ColorUtil.green(rgb) +"," +
 				ColorUtil.blue(rgb) + "]";
 		return retval;

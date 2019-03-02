@@ -1,6 +1,6 @@
 package com.mycompany.a1;
-import java.util.Random; 
 import java.util.Vector;
+
 
 public class GameWorld {
 
@@ -13,8 +13,30 @@ public class GameWorld {
 	private int playerLives;
 	private boolean endGame;
 	
+	public GameWorld() {
+		init();
 	
+	}
 	
+	/**
+	 * @return the endGame
+	 */
+	public boolean isEndGame() {
+		return endGame;
+	}
+
+	/**
+	 * @param endGame the endGame to set
+	 */
+	public void setEndGame(boolean endGame) {
+		this.endGame = endGame;
+	}
+
+	public int getPlayerLives()
+	{
+		return playerLives;
+		
+	}
 	public PlayerShip findPS()
 	{
 		for(int i=0; i < gameObjs.size(); i++)
@@ -87,22 +109,13 @@ public class GameWorld {
 		score = 0;
 		elapsedTime = 0;
 		playerLives = 3;
-		endGame = false;
+		setEndGame(false);
 		//code here to create the initial game objects/setup
 	}
 	
 	/*
 	 * additional methods here to manipulate world objects and related game state data
 	 */
-	public GameWorld() {
-		init();
-	
-	}
-
-	public void eliminate() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 	
@@ -123,12 +136,13 @@ public class GameWorld {
 		case 'b':
 			SpaceStation b = new SpaceStation();
 			gameObjs.add(b);
-			System.out.println("A SpaceShip has been created and added to game world!");
+			System.out.println("A Space Station has been created and added to game world!");
 			break;
 		case 's':
 			PlayerShip s = new PlayerShip();
 			gameObjs.add(s);
-			System.out.println("A Player Ship has been created and added to game world!");
+			gameObjs.add(findPS().getMissileLauncher());
+			System.out.println("A Player Ship and the Missile Launcher has been created and added to game world!");
 			break;
 			
 			
@@ -144,6 +158,8 @@ public class GameWorld {
 		{
 			findPS().changeSpeed(c); //finds player ship, and changes speed
 		}
+		else
+			System.out.println("No Player Ship Exists!");
 	}
 
 	public void turnPS(char c) {
@@ -157,21 +173,26 @@ public class GameWorld {
 		if(findML() != null)
 		{
 			findML().turn(); //finds missile launcher, turns it
+			System.out.println("Turning Missile Launcher!");
 		}			
 	}
 
 	public void firePMissile() {
-		if(findML() != null)
+		if(findML() != null && findPS().getMissileCount() != 0)
 		{
-			findPS().fireMissile(); //finds missile launcher, fires PS missile
+			gameObjs.add(findPS().fireMissile()); //finds missile launcher, fires PS missile
 		}			
+		else
+			System.out.println("Sorry! Player Ship is all out of missiles!");
 	}
 
 	public void fireEMissile() {
-		if(findES() != null)
+		if(findES() != null && findES().getMissileCount() != 0)
 		{
-			findES().fire();; //finds ES, fires missile
+			gameObjs.add(findES().fire()); //finds ES, fires missile
 		}			
+		else
+			System.out.println("Enemy Ship is all out of missiles!");
 	}
 
 	public void resetPos() {
@@ -195,7 +216,7 @@ public class GameWorld {
 		{
 			gameObjs.remove(findAst()); //finds first asteroid and removes that asteroid
 		}		
-	}		
+	}
 	
 
 	public void missileStrikePS() {
@@ -204,7 +225,40 @@ public class GameWorld {
 			gameObjs.remove(findPS());
 			gameObjs.remove(findMissile());
 		}
-		System.out.println("Sorry, a missile struck your ship and destroyed it!");		
+		if(playerLives <= 1)
+		{
+			gameOver();
+		}
+		else
+		{
+			System.out.println("Sorry, a missile struck your ship and destroyed it!");	
+		playerLives--;
+		addObj('s');
+		}
+		
+	}
+	
+	public void eliminate() { //missileStrikeNPS
+		if(findES() != null && findMissile() != null)
+		{
+			gameObjs.remove(findES());
+			gameObjs.remove(findMissile());
+			score = score +1000;
+		}
+
+	}
+
+	private void gameOver() {
+		System.out.println("Sorry! Your ship was destroyed! Game OVER! \nYour Stats\n--------------------------------------------\n\n");
+		printGameState();
+		setEndGame(true);
+		
+		
+		
+		
+
+		
+
 	}
 
 	public void asteroidStrikePS() {
@@ -212,7 +266,10 @@ public class GameWorld {
 		{
 			gameObjs.remove(findPS());
 			gameObjs.remove(findAst());
-			playerLives--;
+			if(playerLives == 1)
+				gameOver();
+			else
+				playerLives--;
 		}		
 	}
 
@@ -221,15 +278,27 @@ public class GameWorld {
 		{
 			gameObjs.remove(findPS());
 			gameObjs.remove(findES());
-			playerLives--;
+			if(playerLives == 1)
+				gameOver();
+			else
+				playerLives--;
 		}				
 	}
 
 	public void asteroidCollision() {
 		if(findAst() != null)
 		{
-			gameObjs.remove(findAst());
-			gameObjs.remove(findAst());
+			int astCount =0;
+			for(int i=0;i<gameObjs.size();i++)
+			{
+				if(gameObjs.get(i) instanceof Asteroid)
+					astCount++;
+			}
+			if(astCount >= 2) //require two or more asteroids for a collision
+			{
+				gameObjs.remove(findAst());
+				gameObjs.remove(findAst());
+			}
 		}
 		
 	}
@@ -253,9 +322,9 @@ public class GameWorld {
 		
 		for(int i=0; i < gameObjs.size(); i++)
 		{
-			if(gameObjs.get(i) instanceof IMoveable)
+			if(gameObjs.get(i) instanceof MoveableGameObject)
 			{
-				((IMoveable) gameObjs.get(i)).move(); //finding each moveable object and moving it
+				((MoveableGameObject) gameObjs.get(i)).Move(); //finding each moveable object and moving it
 				if(gameObjs.get(i) instanceof Missile)
 					if(((Missile)gameObjs.get(i)).getFuel() == 0)
 						gameObjs.remove(i); //if object is missile and fuel level is 0, remove it.
@@ -271,18 +340,16 @@ public class GameWorld {
 		System.out.println("Score: "+ score);
 		System.out.println("Missiles Left: "+findPS().getMissileCount());
 		System.out.println("Game Time: " + elapsedTime +"\n");
+		System.out.println("Lives Left: "+ playerLives);
 	}
 
 	public void printGameMap() {
 		for(int i=0; i <  gameObjs.size(); i++)
 		{
-			System.out.println(gameObjs.get(i));
+			if(!(gameObjs.get(i) instanceof MissileLauncher))
+				System.out.println(gameObjs.get(i));
 		}
 		
 	}
-
-
-
-
 }
 
